@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect to Roots Solar Speaker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tap to Connect to Roots Solar Speaker</h1>
+    <p>Ensure your Bluetooth is enabled.</p>
+    <button onclick="connectBluetooth()">Connect to Roots Solar</button>
+    
+    <script>
+        async function connectBluetooth() {
+            try {
+                // Request a Bluetooth device named "Roots Solar"
+                let device = await navigator.bluetooth.requestDevice({
+                    filters: [{ name: "Roots Solar" }],
+                    optionalServices: ['generic_access'] // Modify if needed
+                });
+
+                // Connect to the device
+                let server = await device.gatt.connect();
+
+                alert("Connected to " + device.name);
+            } catch (error) {
+                alert("Error: " + error);
+                console.error(error);
+            }
+        }
+    </script>
+</body>
+</html>
