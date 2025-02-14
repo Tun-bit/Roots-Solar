@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connect to Roots Solar Speaker</title>
+    <title>Connect to Bluetooth Speaker</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -25,17 +25,18 @@
     </style>
 </head>
 <body>
-    <h1>Tap to Connect to Roots Solar Speaker</h1>
-    <p>Ensure your Bluetooth is enabled.</p>
-    <button onclick="connectBluetooth()">Connect to Roots Solar</button>
+    <h1>Tap to Connect to a Bluetooth Speaker</h1>
+    <p>Make sure your Bluetooth is enabled.</p>
+    <button onclick="connectBluetooth()">Connect to Speaker</button>
     
     <script>
         async function connectBluetooth() {
             try {
-                // Request a Bluetooth device named "Roots Solar"
+                // Request a Bluetooth device, filtering by the speaker's name
                 let device = await navigator.bluetooth.requestDevice({
-                    filters: [{ name: "Roots Solar" }],
-                    optionalServices: ['generic_access'] // Modify if needed
+                    acceptAllDevices: false, // Prevents showing all devices
+                    filters: [{ name: "MySpeaker" }], // Replace with actual speaker name
+                    optionalServices: ['generic_access']
                 });
 
                 // Connect to the device
