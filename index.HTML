@@ -3,59 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connect to Bluetooth Speaker</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
-        }
-        button {
-            padding: 15px 30px;
-            font-size: 18px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <title>Bluetooth Auto Connect</title>
+ 
+    <button class = "bluetoothButton">T Dog in the House</button>
 </head>
 <body>
-    <h1>Tap to Connect to a Bluetooth Speaker</h1>
-    <p>Make sure your Bluetooth is enabled.</p>
-    <button onclick="connectBluetooth()" class = "bluetoothButton">Connect to Speaker</button>
-    
+    <h1>Connecting to Roots Solar...</h1>
     <script>
-
-const bluetoothButton = document.querySelector('.bluetoothButton');
-bluetoothButton.addEventListener('click',function(){
-console.log('Tarun is a loser');
-
-});
-
-
+ 
+        const bluetoothButton = document.querySelector('.bluetoothButton');
+        bluetoothButton.addEventListener('click', function(){
+            console.log('T Doggggg!!!');
+            connectBluetooth();
+        })
+ 
+ 
         async function connectBluetooth() {
             try {
-                // Request a Bluetooth device, filtering by the speaker's name
                 let device = await navigator.bluetooth.requestDevice({
-                    acceptAllDevices: false, // Prevents showing all devices
-                    filters: [{ name: "Roots Solar" }], // Updated to match the actual speaker name
-                    optionalServices: ['generic_access']
+                    acceptAllDevices: false,
+                    filters: [{ namePrefix: "Roots Solar" }], // Updated device name
+                    optionalServices: ['battery_service'] // Use actual supported service UUID
                 });
-
-                // Connect to the device
+ 
+                if (!device.gatt) {
+                    throw new Error("This device does not support GATT.");
+                }
+ 
                 let server = await device.gatt.connect();
-
                 alert("Connected to " + device.name);
             } catch (error) {
-                alert("Error: " + error);
+                alert("Error: " + error.message);
                 console.error(error);
             }
         }
+ 
+        // Auto-trigger Bluetooth connection on page load
+        connectBluetooth();
     </script>
 </body>
 </html>
+ 
+has context menu
+
+
+has context menu
