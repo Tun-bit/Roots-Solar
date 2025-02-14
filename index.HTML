@@ -27,9 +27,14 @@
 <body>
     <h1>Tap to Connect to a Bluetooth Speaker</h1>
     <p>Make sure your Bluetooth is enabled.</p>
-    <button onclick="connectBluetooth()">Connect to Speaker</button>
+    <button onclick="connectBluetooth()" class = "bluetoothButton">Connect to Speaker</button>
     
     <script>
+
+const bluetoothButton = document.querySelector('.bluetoothButton');
+bluetoothButton.addEventListener('click',connectBluetooth());
+
+
         async function connectBluetooth() {
             try {
                 // Request a Bluetooth device, filtering by the speaker's name
